@@ -8,3 +8,9 @@ variable "instance_type" {
   description = "EC2 Instance Type - Instance Sizing"
   type = string
 }
+
+variable "key_name_definer" {
+  description = ""
+  default     = "LL-TEST"
+  type        = string
+}

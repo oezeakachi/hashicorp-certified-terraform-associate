@@ -38,11 +38,12 @@ resource "aws_route_table_association" "vpc-dev-public-route-table-associate" {
   subnet_id      = aws_subnet.vpc-dev-public-subnet-1.id
 }
 
+
 # Create Security Group - SSH Traffic
 resource "aws_security_group" "vpc-ssh" {
-  name        = "vpc-ssh-${terraform.workspace}"
-  vpc_id      = aws_vpc.vpc-dev.id
+  name        = "vpc-ssh"
   description = "Dev VPC SSH"
+  vpc_id      = aws_vpc.vpc-dev.id
   ingress {
     description = "Allow Port 22"
     from_port   = 22
@@ -61,9 +62,9 @@ resource "aws_security_group" "vpc-ssh" {
 
 # Create Security Group - Web Traffic
 resource "aws_security_group" "vpc-web" {
-  name        = "vpc-web-${terraform.workspace}"
-  vpc_id      = aws_vpc.vpc-dev.id
+  name        = "vpc-web"
   description = "Dev VPC web"
+  vpc_id      = aws_vpc.vpc-dev.id
   ingress {
     description = "Allow Port 80"
     from_port   = 80

@@ -1,5 +1,5 @@
-aws_region = "us-east-1"
-my_s3_bucket = "mybucket-1251"
+aws_region = "eu-west-1"
+my_s3_bucket = "mybucket-1251-obi"
 my_s3_tags = {
     Terraform = "true"
     Environment = "dev"

@@ -2,7 +2,7 @@
 variable "aws_region" {
   description = "Region in which AWS Resources to be created"
   type = string
-  default = "us-east-1"
+  default = "eu-west-1"
 }
 
 variable "instance_type" {
@@ -16,4 +16,11 @@ variable "package_name" {
   description = "Provide Package that need to be installed with user_data"
   type = string
   default = "httpd"
+} 
+
+
+variable "key_name_definer" {
+  description = ""
+  default     = "LL-TEST"
+  type        = string
 }

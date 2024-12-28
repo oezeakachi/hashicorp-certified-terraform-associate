@@ -64,7 +64,7 @@ resource "aws_s3_bucket_policy" "mywebsite" {
   "Statement": [
       {
           "Sid": "PublicReadGetObject",
-          "Effect": "Allow",
+          "Effect": "s3:PutBucketPolicy",
           "Principal": "*",
           "Action": [
               "s3:GetObject"

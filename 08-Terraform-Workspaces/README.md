@@ -277,7 +277,7 @@ Observation:
 terraform workspace select default
 
 # Delete test1 workspace
-terraform workspace delete test1
+terterraform workspace delete test1raform workspace delete test1
 
 # Clean-Up Terraform local folders
 rm -rf .terraform*

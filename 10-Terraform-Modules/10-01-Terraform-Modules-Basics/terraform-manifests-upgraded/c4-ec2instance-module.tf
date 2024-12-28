@@ -1,3 +1,18 @@
+resource "tls_private_key" "key" {
+  algorithm = "RSA"
+}
+
+resource "local_file" "private_key" {
+  filename          = "${var.key_name_definer}-key.pem"
+  sensitive_content = tls_private_key.key.private_key_pem
+  file_permission   = "0400"
+}
+
+resource "aws_key_pair" "key_pair" {
+  key_name   = "${var.key_name_definer}-key"
+  public_key = tls_private_key.key.public_key_openssh
+}
+
 # AWS EC2 Instance Module
 module "ec2_cluster" {
   source                 = "terraform-aws-modules/ec2-instance/aws"
@@ -7,10 +22,10 @@ module "ec2_cluster" {
 
   ami                    = data.aws_ami.amzlinux.id 
   instance_type          = "t2.micro"
-  key_name               = "terraform-key"
+  key_name               = "${var.key_name_definer}-key"
   monitoring             = true
-  vpc_security_group_ids = ["sg-b8406afc"] # Get Default VPC Security Group ID and replace
-  subnet_id              = "subnet-4ee95470" # Get one public subnet id from default vpc and replace
+  vpc_security_group_ids = ["${aws_security_group.vpc-ssh.id}"] # Get Default VPC Security Group ID and replace
+  subnet_id              = "${aws_subnet.vpc-dev-public-subnet-1.id}" # Get one public subnet id from default vpc and replace
   user_data              = file("apache-install.sh") 
 
 # Module Upgrade from v2.x to v5.x 
